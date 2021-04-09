@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 
 import imagenes.transformaciones.FranjaCafeClaro;
 import imagenes.transformaciones.FranjaRoja;
+import imagenes.transformaciones.PintarEnXY;
 
 
 public class WinImagen extends JFrame {
@@ -59,6 +60,17 @@ public class WinImagen extends JFrame {
 		
 		mnuImagen.add(item);
 		
+		item = new JMenuItem("Pintar X Y");
+		item.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mnuImagen_pintar100x100();
+			}
+		});
+		
+		mnuImagen.add(item);
+		
 		menuBar.add(mnuImagen);
 		
 		this.setJMenuBar(menuBar);
@@ -73,6 +85,11 @@ public class WinImagen extends JFrame {
 
 	protected void mnuImagen_franjaRoja() {
 		FranjaRoja f= new FranjaRoja(modelo);
+		f.hacer();
+	}
+	
+	protected void mnuImagen_pintar100x100() {
+		PintarEnXY f= new PintarEnXY(modelo, 100, 110);
 		f.hacer();
 	}
 }
