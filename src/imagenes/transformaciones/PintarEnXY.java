@@ -30,7 +30,7 @@ public class PintarEnXY extends Transformacion {
 		if (base < 0)
 			base = c;
 				
-		imagenBase.setPixel(0, m, n);
+		imagenBase.setPixel(0x00ffffff, m, n);
 		
 		if ((m+1) < imagenBase.getAncho() && imagenBase.getPixel(m+1,n) == base)
 			pintarPuntoXY(m + 1, n, base);
