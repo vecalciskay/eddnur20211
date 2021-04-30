@@ -1,6 +1,7 @@
 package listas;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import listas.primero.Lista;
 
@@ -33,6 +34,17 @@ public class TestArrayList1 {
 		b.add("Luis");
 		System.out.println("Nuestea Lista: " + b);
 		System.out.println("Tamano: " + b.tamano());
+		
+		Iterator<String> iterator = b.iterator();
+		while(iterator.hasNext()) {
+			String s = iterator.next();
+			
+			System.out.println("Desde while: " + s);
+		}
+		
+		for (String s : b) {
+			System.out.println("Desde for abreviado: " + s);
+		}
 		
 	}
 }

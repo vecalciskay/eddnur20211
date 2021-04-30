@@ -1,6 +1,8 @@
 package listas.oficial;
 
-public class Lista<T> {
+import java.util.Iterator;
+
+public class Lista<T> implements Iterable<T> {
 
 	private Contenedor<T> raiz;
 	private int tamano;
@@ -19,10 +21,24 @@ public class Lista<T> {
 	}
 	
 	public void insertar(T o) {
-		Contenedor<T> nuevo = new Contenedor<T>(o);
-		nuevo.setSiguiente(raiz);
-		raiz = nuevo;
-		tamano++;
+		
+		if (!(o instanceof Comparable))
+		{
+			Contenedor<T> nuevo = new Contenedor<T>(o);
+			nuevo.setSiguiente(raiz);
+			raiz = nuevo;
+			tamano++;
+		} 
+		else 
+		{
+			Contenedor<T> nuevo = new Contenedor<T>(o);
+			Contenedor<T> actual = raiz;
+			Comparable<T> comparable = (Comparable)o;
+			
+			while(actual != null && comparable.compareTo(actual.getContenido()) > 0 ) {
+				
+			}
+		}
 	}
 	
 	public int tamano() {
@@ -68,6 +84,33 @@ public class Lista<T> {
 		
 		return sb.toString();
 	}
+	
+
+	@Override
+	public Iterator<T> iterator() {
+		return new IteradorLista<T>(raiz);
+	}
+	
+	class IteradorLista<T> implements Iterator<T> {
+
+		private Contenedor<T> actual;
+
+		public IteradorLista(Contenedor<T> inicio) {
+			actual = inicio;
+		}
+		@Override
+		public boolean hasNext() {
+			return actual != null;
+		}
+
+		@Override
+		public T next() {
+			T result = actual.getContenido();
+			actual = actual.getSiguiente();
+			return result;
+		}
+		
+	}
 
 	class Contenedor<T> {
 		private T contenido;
@@ -90,4 +133,5 @@ public class Lista<T> {
 			this.siguiente = siguiente;
 		}
 	}
+
 }
