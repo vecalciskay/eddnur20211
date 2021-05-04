@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 public class Lista<T> implements Iterable<T> {
 
-	private Contenedor<T> raiz;
-	private int tamano;
+	protected Contenedor<T> raiz;
+	protected int tamano;
 	
 	public Lista() {
 		raiz = null;
@@ -21,24 +21,10 @@ public class Lista<T> implements Iterable<T> {
 	}
 	
 	public void insertar(T o) {
-		
-		if (!(o instanceof Comparable))
-		{
-			Contenedor<T> nuevo = new Contenedor<T>(o);
-			nuevo.setSiguiente(raiz);
-			raiz = nuevo;
-			tamano++;
-		} 
-		else 
-		{
-			Contenedor<T> nuevo = new Contenedor<T>(o);
-			Contenedor<T> actual = raiz;
-			Comparable<T> comparable = (Comparable)o;
-			
-			while(actual != null && comparable.compareTo(actual.getContenido()) > 0 ) {
-				
-			}
-		}
+		Contenedor<T> nuevo = new Contenedor<T>(o);
+		nuevo.setSiguiente(raiz);
+		raiz = nuevo;
+		tamano++;
 	}
 	
 	public int tamano() {
