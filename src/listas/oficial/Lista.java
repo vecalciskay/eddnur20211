@@ -2,6 +2,7 @@ package listas.oficial;
 
 import java.util.Iterator;
 
+
 public class Lista<T> implements Iterable<T> {
 
 	protected Contenedor<T> raiz;
@@ -39,6 +40,54 @@ public class Lista<T> implements Iterable<T> {
 		}
 		
 		return resultado;*/
+	}
+	
+	public void sort() {
+		Contenedor<T> actual1 = raiz;
+		int i = 0;
+		int maxWhile = tamano - 1;
+		
+		while(maxWhile > 0) {
+			i = 0;
+			actual1 = raiz;
+			
+			while(i < maxWhile) {
+				
+				T obj1 = actual1.getContenido();
+				T obj2 = actual1.getSiguiente().getContenido();
+				
+				Comparable<T> cobj2 = (Comparable<T>)obj2;
+				
+				if (cobj2.compareTo(obj1) <= 0) {
+					actual1.setContenido(obj2);
+					actual1.getSiguiente().setContenido(obj1);
+				}
+				
+				actual1 = actual1.getSiguiente();
+				i++;
+			}
+			maxWhile--;
+		}
+	}
+	
+	public void vaciar() {
+		raiz = null;
+	}
+	
+	public void eliminar(int pos) {
+		if (pos == 0) {
+			raiz = raiz.getSiguiente();
+			return;
+		}
+		
+		Contenedor<T> actual = raiz;
+		int i = 0;
+		while((i+1) < pos && actual.getSiguiente() != null) {
+			actual = actual.getSiguiente();
+			i++;
+		}
+		
+		actual.setSiguiente(actual.getSiguiente().getSiguiente());
 	}
 	
 	public void add(T o) {
