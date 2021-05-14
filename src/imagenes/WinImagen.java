@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 
 import imagenes.transformaciones.FranjaCafeClaro;
 import imagenes.transformaciones.FranjaRoja;
@@ -32,7 +33,8 @@ public class WinImagen extends JFrame {
 		modelo.addObserver(panel);
 		
 		this.getContentPane().setLayout(new BorderLayout());
-		this.getContentPane().add(panel, BorderLayout.CENTER);
+		JScrollPane scroller = new JScrollPane(panel);
+		this.getContentPane().add(scroller, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
 		

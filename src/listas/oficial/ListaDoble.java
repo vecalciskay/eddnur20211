@@ -2,15 +2,24 @@ package listas.oficial;
 
 import java.util.Iterator;
 
-
-public class Lista<T> implements Iterable<T> {
+public class ListaDoble<T> implements Iterable<T> {
 
 	protected Contenedor<T> raiz;
+	protected Contenedor<T> cola;
 	protected int tamano;
 	
-	public Lista() {
+	public ListaDoble() {
 		raiz = null;
+		cola = null;
 		tamano = 0;
+	}
+	
+	public Contenedor<T> getCola() {
+		return cola;
+	}
+
+	public void setCola(Contenedor<T> cola) {
+		this.cola = cola;
 	}
 	
 	public Contenedor<T> getRaiz() {
@@ -23,6 +32,14 @@ public class Lista<T> implements Iterable<T> {
 	
 	public void insertar(T o) {
 		Contenedor<T> nuevo = new Contenedor<T>(o);
+		
+		if (tamano == 0) {
+			raiz = nuevo;
+			cola = nuevo;
+			return;
+		}
+		
+		raiz.setAnterior(nuevo);
 		nuevo.setSiguiente(raiz);
 		raiz = nuevo;
 		tamano++;
@@ -97,19 +114,17 @@ public class Lista<T> implements Iterable<T> {
 	}
 	
 	public void add(T o) {
-		if (raiz == null) {
-			insertar(o);
+		Contenedor<T> nuevo = new Contenedor<T>(o);
+		
+		if (tamano == 0) {
+			raiz = nuevo;
+			cola = nuevo;
 			return;
 		}
-
-		Contenedor<T> actual = raiz;
-		Contenedor<T> nuevo = new Contenedor<T>(o);
-		while(actual.getSiguiente() != null) {
-			actual = actual.getSiguiente();
-		}
 		
-		// Aqui tenemos al ultimo
-		actual.setSiguiente(nuevo);
+		cola.setSiguiente(nuevo);
+		nuevo.setAnterior(cola);
+		cola = nuevo;
 		tamano++;
 	}
 	
@@ -129,14 +144,14 @@ public class Lista<T> implements Iterable<T> {
 
 	@Override
 	public Iterator<T> iterator() {
-		return new IteradorLista<T>(raiz);
+		return new IteradorListaDoble<T>(raiz);
 	}
 	
-	class IteradorLista<T> implements Iterator<T> {
+	class IteradorListaDoble<T> implements Iterator<T> {
 
 		private Contenedor<T> actual;
 
-		public IteradorLista(Contenedor<T> inicio) {
+		public IteradorListaDoble(Contenedor<T> inicio) {
 			actual = inicio;
 		}
 		@Override
@@ -156,10 +171,12 @@ public class Lista<T> implements Iterable<T> {
 	class Contenedor<T> {
 		private T contenido;
 		private Contenedor<T> siguiente;
+		private Contenedor<T> anterior;
 		
 		public Contenedor(T c) {
 			contenido = c;
 			siguiente = null;
+			anterior = null;
 		}
 		public T getContenido() {
 			return contenido;
@@ -172,6 +189,13 @@ public class Lista<T> implements Iterable<T> {
 		}
 		public void setSiguiente(Contenedor<T> siguiente) {
 			this.siguiente = siguiente;
+		}
+		
+		public Contenedor<T> getAnterior() {
+			return anterior;
+		}
+		public void setAnterior(Contenedor<T> anterior) {
+			this.anterior = anterior;
 		}
 	}
 
