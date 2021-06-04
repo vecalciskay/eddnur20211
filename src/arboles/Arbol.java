@@ -1,9 +1,9 @@
 package arboles;
-
 import listas.oficial.Lista;
 
-public class Arbol<T> {
+public class Arbol<T extends Identificable> {
 	private Contenedor<T> raiz;
+	private static int alpha = 5;
 	
 	public Contenedor<T> getRaiz() {
 		return raiz;
@@ -12,11 +12,46 @@ public class Arbol<T> {
 	public void setRaiz(Contenedor<T> raiz) {
 		this.raiz = raiz;
 	}
+	
+	public void addHijo(T o, String padre) {
+		if (padre == null) {
+			raiz = new Contenedor<>(o);
+			return;
+		}
+		
+		Contenedor<T> hijo = new Contenedor<>(o);
+		
+		Contenedor<T> contenedorPadre = buscar(padre);
+		contenedorPadre.getHijos().insertar(hijo);
+		hijo.setPadre(contenedorPadre);
+	}
+	
+	public Contenedor<T> buscar(String id) {
+		if (raiz == null)
+			return null;
+		
+		return raiz.buscar(id);
+	}
 
-	class Contenedor<T> {
+	@Override
+	public String toString() {
+		if (raiz == null)
+			return "VACIO";
+		return raiz.toString();
+	}
+
+	public static class Contenedor<T extends Identificable> {
+		
 		private T contenido;
 		private Lista<Contenedor<T>> hijos;
 		private Contenedor<T> padre;
+		
+		public Contenedor(T o) {
+			contenido = o;
+			hijos = new Lista<>();
+			padre = null;
+		}
+		
 		public T getContenido() {
 			return contenido;
 		}
@@ -36,5 +71,34 @@ public class Arbol<T> {
 			this.padre = padre;
 		}
 		
+		public Contenedor<T> buscar(String id) {
+			if (contenido.getId().equals(id))
+				return this;
+			
+			for (Contenedor<T> hijo : hijos) {
+				Contenedor<T> posible = hijo.buscar(id);
+				if (posible != null )
+					return posible;
+			}
+			
+			return null;
+		}
+		
+		@Override
+		public String toString() {
+			StringBuilder respuesta = new StringBuilder();
+			respuesta.append(this.getContenido().getId());
+			if (hijos.tamano() > 0) {
+				respuesta.append("(");
+				String separador = "";
+				for (Contenedor<T> hijo : hijos) {
+					respuesta.append(separador).append(hijo.toString());
+					separador = ",";
+				}
+				respuesta.append(")");
+			}
+			
+			return respuesta.toString();
+		}
 	}
 }
