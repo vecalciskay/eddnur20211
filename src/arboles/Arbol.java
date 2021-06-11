@@ -2,7 +2,7 @@ package arboles;
 import listas.oficial.Lista;
 
 public class Arbol<T extends Identificable> {
-	private Contenedor<T> raiz;
+	protected Contenedor<T> raiz;
 	private static int alpha = 5;
 	
 	public Contenedor<T> getRaiz() {
