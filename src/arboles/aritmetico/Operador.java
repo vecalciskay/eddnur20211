@@ -8,7 +8,7 @@ public class Operador extends ElementoAritmetico {
 	
 	public Operador(String s) {
 		simbolo = s;
-		if (s == "+") {
+		if (s.equals("+")) {
 			nombre = "Suma";
 		}
 	}
