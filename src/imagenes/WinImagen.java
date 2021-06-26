@@ -41,13 +41,7 @@ public class WinImagen extends JFrame {
 		JMenu mnuImagen = new JMenu("Imagen");
 		
 		JMenuItem item = new JMenuItem("Franja roja");
-		item.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mnuImagen_franjaRoja();
-			}
-		});
+		item.addActionListener(new ControladorFranjaRoja(modelo));
 		
 		mnuImagen.add(item);
 		
@@ -85,11 +79,6 @@ public class WinImagen extends JFrame {
 		f.hacer();
 	}
 
-	protected void mnuImagen_franjaRoja() {
-		FranjaRoja f= new FranjaRoja(modelo);
-		f.hacer();
-	}
-	
 	protected void mnuImagen_pintar100x100() {
 		PintarEnXY f= new PintarEnXY(modelo, 100, 110);
 		f.hacer();

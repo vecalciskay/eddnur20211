@@ -45,6 +45,8 @@ public class Arbol<T extends Identificable> {
 		private T contenido;
 		private Lista<Contenedor<T>> hijos;
 		private Contenedor<T> padre;
+		private int ultimoX;
+		private int ultimoY;
 		
 		public Contenedor(T o) {
 			contenido = o;
