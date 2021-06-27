@@ -125,7 +125,6 @@ public class Lista<T> implements Iterable<T> {
 		
 		return sb.toString();
 	}
-	
 
 	@Override
 	public Iterator<T> iterator() {

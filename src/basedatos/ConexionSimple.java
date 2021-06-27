@@ -11,7 +11,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * docker run -p 5432:5432 -d -e POSTGRES_PASSWORD=postgres -e
+ * POSTGRES
+ * ==============================================================
+ * docker run -p 5432:5432 -d -e POSTGRES_PASSWORD=postgres -e 
  * POSTGRES_USER=postgres -e POSTGRES_DB=edd-ejemplo -v
  * pgdata:/var/lib/postgresql/data postgres
  * 
@@ -22,6 +24,15 @@ import org.apache.logging.log4j.Logger;
  * El numero de imagen se saca de la lista de procesos docker:
  * 
  * docker ps
+ * 
+ * 
+ * MYSQL
+ * =============================================================
+ * docker run --detach --name=edd-mysql -p 33306:3306 --env="MYSQL_ROOT_PASSWORD=mysql123" mysql
+ * 
+ * Luego se puede conectar al mysql de la siguiente manera
+ * 
+ * docker exec -it edd-mysql mysql -h 127.0.0.1 -P 3306 --protocol=tcp -uroot -p
  * 
  * @author Vladimir
  *
